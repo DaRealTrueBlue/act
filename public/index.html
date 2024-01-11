@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACT | DRTB</title>
+    <link rel="icon" href="icon.ico">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="terms-modal" class="modal">
+        <div class="modal-content">
+            <h2>Terms and Conditions</h2>
+            <!-- Include your terms and conditions content here -->
+            <p>You can view the Terms and Conditions <a href="tac.html" class="tac">HERE</a></p>
+            <p>You can view the Privacy Policy <a href="privacy-policy.html" class="privacy-policy">HERE</a></p>
+            <label>
+                <input type="checkbox" id="agree-checkbox"> I agree to the Terms and Conditions and Privacy Policy
+            </label>
+            <button onclick="closeTermsModal()" id="ctmbutton">Continue</button>
+        </div>
+    </div>
+    <div id="chat">
+        <div id="chat-title">
+            <h1>Anonymous Chat Terminal</h1>
+        </div>
+        <div id="chat-display">
+            <!-- Messages will be displayed here -->
+        </div>
+        <div id="message-input">
+            <form id="message-form">
+                <input type="text" id="message" name="message" placeholder=">_" required>
+                <button type="submit" id="send-button">Send</button>
+            </form>
+        </div>
+        <div id="chat-footer">
+            <h3>Made by DRTB</h3>
+            <h6>By sending any messages you agree to the <a href="tac.html" class="tac">Terms and Conditions</a> and <a href="privacy-policy.html" class="privacy-policy">Privacy Policy</a></h6>
+        </div>
+    </div>
+
+    <div id="footer">
+        <p>&copy; 2024 ACT | DRTB. All rights reserved.</p>
+    </div>
+
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const chatDisplay = document.getElementById('chat-display');
+            const messageForm = document.getElementById('message-form');
+            const messageInput = document.getElementById('message');
+            const agreeCheckbox = document.getElementById('agree-checkbox');
+
+            const socket = io();
+            const messages = []; // Array to store messages
+
+            messageForm.addEventListener('submit', function (event) {
+                event.preventDefault();
+
+                // Check if the user has agreed to the Terms and Conditions and Privacy Policy
+                if (!agreeCheckbox.checked) {
+                    alert('Please agree to the Terms and Conditions and Privacy Policy before sending messages.');
+                    return;
+                }
+
+                const messageText = messageInput.value.trim();
+                if (messageText !== '') {
+                    socket.emit('chat message', messageText);
+                    messageInput.value = '';
+                }
+            });
+
+            socket.on('chat message', function (message) {
+                messages.push({ message, timestamp: new Date().getTime() });
+                displayMessages();
+            });
+        });
+    </script>
+</body>
+</html>

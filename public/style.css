@@ -1,0 +1,223 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+body {
+    font-family: 'Courier New', monospace;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: linear-gradient(45deg, #121212, #1a1a1a, #121212, #1a1a1a);
+    color: #00ff00;
+}
+
+#chat {
+    max-width: 800px;
+    background-color: #000;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+    overflow: hidden;
+}
+
+/* Matrix-like background animation */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    background: 
+        linear-gradient(rgba(0, 255, 0, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 0, 0.1) 1px, transparent 1px),
+        linear-gradient(rgba(0, 0, 0, 0.5) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 0, 0, 0.5) 1px, transparent 1px);
+    background-size: 50px 50px;
+    transform: scale(2);
+    animation: matrixAnimation 10s infinite linear;
+}
+
+@keyframes matrixAnimation {
+    background-position: 0 0;
+    background-position: 50px 50px;
+}
+
+#chat-title {
+    text-align: center;
+    padding: 10px;
+    background-color: #222;
+    border-bottom: 1px solid #00ff00;
+}
+
+#chat-footer {
+    text-align: center;
+    padding: 5px;
+    background-color: #222;
+    border-bottom: 1px solid #00ff00;
+    animation: rainbowText 5s infinite; /* Rainbow color animation */
+}
+
+.tac, .privacy-policy {
+    color: white;
+}
+
+.tac:hover, .privacy-policy:hover {
+    color: white;
+}
+
+@keyframes rainbowText {
+    0% {
+        color: #ff0000; /* Red */
+    }
+    16.666% {
+        color: #ff8000; /* Orange */
+    }
+    33.333% {
+        color: #ffff00; /* Yellow */
+    }
+    50% {
+        color: #00ff00; /* Green */
+    }
+    66.666% {
+        color: #0000ff; /* Blue */
+    }
+    83.333% {
+        color: #8000ff; /* Indigo */
+    }
+    100% {
+        color: #ff00ff; /* Violet */
+    }
+}
+
+#chat-display {
+    height: 500px;
+    overflow-y: scroll;
+    padding: 10px;
+    background-color: #000;
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: #333 #111; /* Firefox */
+}
+
+#chat-display::-webkit-scrollbar {
+    width: 12px; /* Chrome, Safari */
+}
+
+#chat-display::-webkit-scrollbar-thumb {
+    background-color: #333; /* Chrome, Safari */
+}
+
+#message-input {
+    padding: 10px;
+    background-color: #000;
+    display: flex;
+    align-items: center;
+}
+
+#message-form {
+    flex: 1;
+    display: flex;
+}
+
+#message {
+    flex: 1;
+    padding: 8px;
+    margin-right: 5px;
+    background-color: #222;
+    color: #00ff00;
+    border: 1px solid #00ff00;
+    font-family: 'Courier New', monospace;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+#message:hover {
+    border-color: #33ff33;
+}
+
+#send-button {
+    background-color: #00ff00;
+    
+    color: #000;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+}
+
+#send-button:hover {
+    background-color: #33ff33;
+    transform: scale(1.1); /* Scale up on hover */
+}
+
+.message-entry {
+    opacity: 0;
+    animation: fadeIn 0.5s ease-in-out forwards;
+}
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: 20px;
+    margin: 10% auto;
+    width: 80%;
+    text-align: center;
+}
+
+#terms-modal p {
+    margin-bottom: 10px;
+}
+
+#ctmbutton {
+    background-color: #00ff00;
+    
+    color: #000;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+}
+
+#ctmbutton:hover {
+    background-color: #33ff33;
+    transform: scale(1.1); /* Scale up on hover */
+}
+
+#footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #222;
+    border-top: 1px solid #00ff00;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+#footer p {
+    margin: 0;
+    color: white;
+}
